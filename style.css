@@ -150,6 +150,41 @@ a {
     letter-spacing: 0.3px;
 }
 
+/* Story */
+
+.story {
+    margin: 44px 0 0;
+    padding: 26px 22px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #1c1408 0%, #121212 55%);
+    border: 1px solid rgba(255, 159, 10, 0.18);
+}
+
+.story h2 {
+    margin: 0 0 14px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+}
+
+.story p {
+    margin: 0 0 14px;
+    color: #e5e5ea;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.story-kicker {
+    font-weight: 900;
+    color: #fff !important;
+}
+
+.story-signature {
+    margin: 18px 0 0 !important;
+    color: #ff9f0a !important;
+    font-weight: 800;
+}
+
 /* Documents (privacy, terms, support) */
 
 .doc h1 {
