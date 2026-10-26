@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Report a Problem · Get Me Out of This Truck</title>
-    <meta name="description" content="Report a bug or a bad staging spot in Get Me Out of This Truck.">
+    <meta name="description" content="Report a bug, a bad staging spot, or a great spot we should add to Get Me Out of This Truck.">
     <meta name="theme-color" content="#000000">
     <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
     <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
@@ -19,24 +19,108 @@
         <span>GET ME OUT OF THIS TRUCK</span>
     </a>
 
-    <!-- Placeholder: the real report form replaces this page, same URL. -->
-
     <h1>Report a Problem</h1>
-    <p class="updated">The report form is almost ready. Until then, email works just as well.</p>
+    <p class="updated">Bad pick, bug, or a great spot we missed? Takes about a minute.</p>
 
-    <div class="contact-options">
-        <a class="email-box" href="mailto:support@getmeoutofthistruck.com?subject=Problem%20report">support@getmeoutofthistruck.com</a>
+    <!--
+        Submissions go to Formspree, which emails them to the support inbox.
+        To change where they go, change data-endpoint (formspree.io/f/<id>).
+    -->
+    <form
+        id="reportForm"
+        class="report-form"
+        data-endpoint="https://formspree.io/f/xrpppbky"
+        novalidate
+    >
+
+        <fieldset class="field">
+            <legend>What's this about?</legend>
+
+            <div class="chip-group" id="kindGroup">
+                <label class="chip"><input type="radio" name="kind" value="Bad staging spot" checked><span>Bad staging spot</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Bad adventure pick"><span>Bad adventure pick</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Bug or crash"><span>Bug or crash</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Great spot to add"><span>Great spot to add</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Idea or feedback"><span>Idea or feedback</span></label>
+            </div>
+        </fieldset>
+
+        <div class="field" data-show-for="Bad staging spot,Bad adventure pick,Great spot to add">
+            <label for="searchedFrom">Where were you searching from?</label>
+            <input id="searchedFrom" name="searched_from" type="text" placeholder="City, address, or ZIP" autocomplete="off">
+        </div>
+
+        <div class="field" data-show-for="Bad staging spot,Bad adventure pick,Great spot to add">
+            <label for="spot" id="spotLabel">Which spot or suggestion?</label>
+            <input id="spot" name="spot" type="text" placeholder="Name or address it gave you" autocomplete="off">
+        </div>
+
+        <fieldset class="field" data-show-for="Bad staging spot,Bad adventure pick">
+            <legend>What was wrong? <span class="optional">Tap all that apply</span></legend>
+
+            <div class="chip-group">
+                <label class="chip"><input type="checkbox" name="problems" value="Gated or locked"><span>Gated or locked</span></label>
+                <label class="chip"><input type="checkbox" name="problems" value="No room for a rig"><span>No room for a rig</span></label>
+                <label class="chip"><input type="checkbox" name="problems" value="Downtown or too tight"><span>Downtown or too tight</span></label>
+                <label class="chip"><input type="checkbox" name="problems" value="No trucks allowed"><span>No trucks allowed</span></label>
+                <label class="chip"><input type="checkbox" name="problems" value="Too far"><span>Too far</span></label>
+                <label class="chip"><input type="checkbox" name="problems" value="Closed"><span>Closed</span></label>
+                <label class="chip"><input type="checkbox" name="problems" value="Other"><span>Other</span></label>
+            </div>
+        </fieldset>
+
+        <div class="field">
+            <label for="details" id="detailsLabel">Details</label>
+            <textarea id="details" name="details" rows="5" required placeholder="What happened? The more specific, the faster we can fix it."></textarea>
+            <p class="field-error" id="detailsError" hidden>Tell us a little about it (a sentence is plenty).</p>
+        </div>
+
+        <fieldset class="field">
+            <legend>Where did it happen?</legend>
+
+            <div class="chip-group">
+                <label class="chip"><input type="radio" name="platform" value="iPhone app" checked><span>iPhone app</span></label>
+                <label class="chip"><input type="radio" name="platform" value="Website"><span>Website</span></label>
+            </div>
+        </fieldset>
+
+        <div class="field" data-show-for-platform="iPhone app">
+            <label for="appVersion">App version <span class="optional">In the app: tap ⓘ, it's at the top</span></label>
+            <input id="appVersion" name="app_version" type="text" placeholder="e.g. 1.0 (4)" autocomplete="off">
+        </div>
+
+        <div class="field">
+            <label for="email">Your email <span class="optional">Optional, if you'd like a reply</span></label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email">
+            <p class="field-error" id="emailError" hidden>That email doesn't look right. Fix it or leave it blank.</p>
+        </div>
+
+        <!-- Spam trap: hidden from people, bots fill it in. -->
+        <div class="trap" aria-hidden="true">
+            <label for="website">Leave this empty</label>
+            <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <input type="hidden" name="_subject" id="subjectField" value="Problem report">
+
+        <button type="submit" class="submit-button" id="submitButton">Send report</button>
+
+        <p class="form-error" id="formError" hidden>
+            Couldn't send that. Check your signal and try again, or email
+            <a href="mailto:support@getmeoutofthistruck.com">support@getmeoutofthistruck.com</a>.
+        </p>
+
+        <p class="form-fineprint">
+            Sent to our support inbox. See the <a href="../privacy/">Privacy Policy</a>.
+        </p>
+    </form>
+
+    <div class="report-success" id="reportSuccess" hidden>
+        <h2>Got it. Thanks!</h2>
+        <p>Your report is in our inbox. Every one gets read, and it helps make the app better for every driver out there.</p>
+        <p id="replyNote" hidden>We'll reply to the email you gave us within a couple of days.</p>
+        <button type="button" class="form-button" id="sendAnother">Send another report</button>
     </div>
-
-    <h2>Include these if you can</h2>
-    <ul>
-        <li>The city or location you searched from.</li>
-        <li>Which spot or suggestion it gave you.</li>
-        <li>What was wrong with it: gated, no room for a rig, downtown, too far, closed, or something else.</li>
-        <li>Your phone model and the app version (in the app: tap ⓘ, version is at the top).</li>
-    </ul>
-
-    <p>Thanks for helping make it better for every driver out there.</p>
 
     <footer class="site-footer">
         <nav>
@@ -49,5 +133,7 @@
     </footer>
 
 </main>
+
+<script src="report.js"></script>
 </body>
 </html>

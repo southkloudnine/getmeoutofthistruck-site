@@ -291,6 +291,186 @@ a {
     background: rgba(255, 255, 255, 0.15);
 }
 
+/* Report form */
+
+[hidden] {
+    display: none !important;
+}
+
+.report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 8px;
+}
+
+.field {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.field > label,
+.field > legend {
+    display: block;
+    margin: 0 0 8px;
+    padding: 0;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.optional {
+    display: block;
+    margin-top: 2px;
+    color: #8e8e93;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.report-form input[type="text"],
+.report-form input[type="email"],
+.report-form textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #333;
+    border-radius: 12px;
+    background: #0f0f0f;
+    color: #fff;
+    font: inherit;
+    font-size: 16px; /* 16px stops iPhone Safari from zooming in */
+    outline: none;
+}
+
+.report-form textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.45;
+}
+
+.report-form input:focus,
+.report-form textarea:focus {
+    border-color: #ff9f0a;
+}
+
+.report-form input::placeholder,
+.report-form textarea::placeholder {
+    color: #666;
+}
+
+.report-form .invalid {
+    border-color: #ff453a;
+}
+
+.field-error {
+    margin: 6px 0 0;
+    color: #ff6961;
+    font-size: 14px;
+}
+
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    position: relative;
+    cursor: pointer;
+}
+
+.chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.chip span {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #212121;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    user-select: none;
+}
+
+.chip input:checked + span {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.chip input:focus-visible + span {
+    outline: 2px solid #ff9f0a;
+    outline-offset: 2px;
+}
+
+.trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+    color: #000;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.submit-button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+.form-error {
+    margin: -8px 0 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255, 69, 58, 0.12);
+    color: #ffb3ad;
+    font-size: 15px;
+}
+
+.form-fineprint {
+    margin: -8px 0 0;
+    color: #8e8e93;
+    font-size: 13px;
+    text-align: center;
+}
+
+.report-success {
+    margin-top: 8px;
+    padding: 22px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #1c1408 0%, #121212 70%);
+    border: 1px solid rgba(255, 159, 10, 0.18);
+}
+
+.report-success h2 {
+    margin: 0 0 10px;
+}
+
+.report-success .form-button {
+    width: 100%;
+    margin-top: 6px;
+    font: inherit;
+    font-weight: 900;
+    cursor: pointer;
+}
+
 /* Footer used on every page */
 
 .site-footer {
